@@ -1,7 +1,8 @@
 import unittest
-from decision_logic import analyze_vs_series
+from src.decision_logic import analyze_vs_series
 
 class TestDecisionLogic(unittest.TestCase):
+
     def test_vs_above_threshold(self):
         # Test case: high ∇S values over 90 days
         test_data = [6.6] * 91
@@ -15,10 +16,10 @@ class TestDecisionLogic(unittest.TestCase):
         self.assertEqual(result["status"], "NORMAL")
 
     def test_vs_edge_case(self):
-        # Edge case: critical value just reached
+        # Edge case: critical value just reached (mix)
         test_data = [6.5] * 45 + [6.3] * 46
         result = analyze_vs_series(test_data)
         self.assertEqual(result["status"], "NORMAL")
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
