@@ -1,5 +1,5 @@
 import unittest
-from src.src.decision_logic import analyze_vs_series
+from src.decision_logic import analyze_vs_series
 
 class TestDecisionLogic(unittest.TestCase):
     def test_vs_above_threshold(self):
