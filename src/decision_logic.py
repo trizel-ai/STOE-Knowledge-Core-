@@ -17,9 +17,10 @@ def check_spectral_alert(vs_series):
         vs_series (list of float): Daily ∇S values.
 
     Returns:
-        dict: Alert status and timestamp.
+        dict: Alert status and trigger metadata.
     """
     consecutive_days = 0
+
     for value in vs_series:
         if value > VS_CRITICAL_THRESHOLD:
             consecutive_days += 1
@@ -36,4 +37,20 @@ def check_spectral_alert(vs_series):
         "alert": False,
         "triggered_on": None,
         "reason": "No critical threshold breach"
+    }
+
+def analyze_vs_series(vs_series):
+    """
+    Wrapper function that analyzes ∇S series and returns a normalized result.
+
+    Args:
+        vs_series (list of float): Daily ∇S values.
+
+    Returns:
+        dict: Status ("ALERT" or "NORMAL") and detailed reason.
+    """
+    result = check_spectral_alert(vs_series)
+    return {
+        "status": "ALERT" if result["alert"] else "NORMAL",
+        "details": result
     }
